@@ -46,14 +46,19 @@ export default {
           const res = await this.$http.post('login',this.formname)
            let {data,meta} = res.data
            if(meta.status ==200) {
+             //保存token
+             localStorage.setItem('token',data.token)
+             //提示成功
               this.$message({
               showClose: true,
               message: meta.msg,
              type: 'success'
             })
+            //跳转home页面
             this.$router.push({name:'home'})
 
            }else {
+             //提示失败
               this.$message({
                showClose: true,
                message: meta.msg,
