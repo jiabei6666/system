@@ -41,29 +41,48 @@ export default {
      
   },
   methods:{
-      commitlogin() {
-        this.$http.post('login',this.formname)
-        .then(res=>{
-          let {data,meta} = res.data
-          if(meta.status == 200) {
-            this.$message({
+     async commitlogin() {
+        //使用async异步编程，同步的方式书写
+          const res = await this.$http.post('login',this.formname)
+           let {data,meta} = res.data
+           if(meta.status ==200) {
+              this.$message({
               showClose: true,
               message: meta.msg,
-              type: 'success'
+             type: 'success'
             })
-            if(this.$router.push({name:'home'})){
-              this.$message.close()
-            }
+            this.$router.push({name:'home'})
+
+           }else {
+              this.$message({
+               showClose: true,
+               message: meta.msg,
+               type: 'error'
+             })
+
+           }
+
+        // this.$http.post('login',this.formname)
+        // .then(res=>{
+        //   let {data,meta} = res.data
+        //   if(meta.status == 200) {
+        //     this.$message({
+        //       showClose: true,
+        //       message: meta.msg,
+        //       type: 'success'
+        //     })
+        //     this.$router.push({name:'home'})
+        //     
               
             
-          }else {
-             this.$message({
-              showClose: true,
-              message: meta.msg,
-              type: 'error'
-            })
-          }
-        })
+        //   }else {
+        //      this.$message({
+        //       showClose: true,
+        //       message: meta.msg,
+        //       type: 'error'
+        //     })
+        //   }
+        // })
       }
   }
 };
