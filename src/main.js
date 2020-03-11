@@ -6,6 +6,9 @@ import store from './store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI)
+//引入axios
+import MyHttpServer from 'plugins/http'
+Vue.use(MyHttpServer)
 
 Vue.config.productionTip = false
 

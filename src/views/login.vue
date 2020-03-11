@@ -7,12 +7,15 @@
               >
       <h2>用户登录</h2>
       <el-form-item label="用户名">
-        <el-input v-model="formname.name"></el-input>
+        <el-input v-model="formname.username"></el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="formname.region"></el-input>
+        <el-input v-model="formname.password"></el-input>
       </el-form-item>
-      <el-button class="button" type="primary">登录</el-button>
+      <el-button class="button"
+                 type="primary" 
+                 @click.prevent="commitlogin"
+                 >登录</el-button>
     </el-form>
   </div>
 </template>
@@ -20,11 +23,48 @@
 
 
 <script>
+import { gethome } from 'network/home'
 export default {
   data() {
     return {
-      formname: {}
-    };
+      formname: {
+          username:'admin',
+          password:'123456'
+      }
+    }
+
+  },
+  created() {
+    //   gethome().then(res=>{
+    //       console.log(res)
+    //   })
+     
+  },
+  methods:{
+      commitlogin() {
+        this.$http.post('login',this.formname)
+        .then(res=>{
+          let {data,meta} = res.data
+          if(meta.status == 200) {
+            this.$message({
+              showClose: true,
+              message: meta.msg,
+              type: 'success'
+            })
+            if(this.$router.push({name:'home'})){
+              this.$message.close()
+            }
+              
+            
+          }else {
+             this.$message({
+              showClose: true,
+              message: meta.msg,
+              type: 'error'
+            })
+          }
+        })
+      }
   }
 };
 </script>
