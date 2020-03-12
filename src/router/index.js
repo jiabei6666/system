@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 
 const login = () =>import('views/login')
 const home = () =>import('views/home')
+const user = () =>import('components/user/user')
 
 
 
@@ -22,7 +23,11 @@ const routes = [
   {
     path:'/home',
     name:'home',
-    component:home
+    component:home,
+    children:[
+      {path:'/user',component:user}
+    ]
+    
   }
 ]
 

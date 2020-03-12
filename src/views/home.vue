@@ -19,16 +19,17 @@
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
-          unique-opened="true"
+          :unique-opened="true"
+          :router='true'
         >
-        <!-- 1 -->
+          <!-- 1 -->
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>导航一</span>
             </template>
 
-            <el-menu-item index="1-1">
+            <el-menu-item index="user">
               <template slot="title">
                 <i class="el-icon-location"></i>
                 <span>导航一</span>
@@ -98,7 +99,10 @@
         <!-- ---------------------------- -->
       </el-aside>
 
-      <el-main class="main">Main</el-main>
+      <el-main class="main">
+          <!-- 显示子路由 -->
+          <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -125,7 +129,7 @@ export default {
     
   },
   beforeCreate() {
-      console.log('进来了')
+      
      const token = localStorage.getItem('token')
       if(!token) {
           this.$router.push('/login')
