@@ -11,6 +11,8 @@ const goods = () =>import('components/goods/goods')
 const goodsadd = () =>import('components/goodsadd/goodsadd')
 const params = () =>import('components/params/params')
 const categories = () =>import('components/categories/categories')
+const orders = () =>import('components/orders/orders')
+const reports = () =>import('components/reports/reports')
 import { Message } from 'element-ui';
 
 
@@ -37,7 +39,9 @@ const routes = [
       {path:'/goods',component:goods},
       {path:'/goodsadd',component:goodsadd},
       {path:'/params',component:params},
-      {path:'/categories',component:categories}
+      {path:'/categories',component:categories},
+      {path:'/orders',component:orders},
+      {path:'/reports',component:reports}
     ]
     
   }
