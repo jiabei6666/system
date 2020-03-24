@@ -15,86 +15,26 @@
         <el-menu
           default-active="2"
           class="el-menu-vertical-demo"
-          
+          active-text-color="#ffd04b"
           background-color="#545c64"
           text-color="#fff"
-          active-text-color="#ffd04b"
           :unique-opened="true"
           :router='true'
         >
           <!-- 1 -->
-          <el-submenu index="1">
+          <el-submenu :index="''+item.order" v-for="(item,index) in menusData" :key="index">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>导航一</span>
+              <span>{{item.authName}}</span>
             </template>
 
-            <el-menu-item index="user">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>导航一</span>
-              </template>
+            <el-menu-item :index="item2.path" v-for="(item2,index) in item.children" :key="index">
+              <i class="el-icon-menu"></i>
+              <span>{{item2.authName}}</span>
             </el-menu-item>
           </el-submenu>
-          <!-- 2-->
-          <el-submenu index="2">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>导航一</span>
-            </template>
-
-            <el-menu-item index="1-1">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>导航一</span>
-              </template>
-            </el-menu-item>
-          </el-submenu>
-          <!-- 3-->
-          <el-submenu index="3">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>导航一</span>
-            </template>
-
-            <el-menu-item index="1-1">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>导航一</span>
-              </template>
-            </el-menu-item>
-          </el-submenu>
-          <!-- 4-->
-          <el-submenu index="4">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>导航一</span>
-            </template>
-
-            <el-menu-item index="1-1">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>导航一</span>
-              </template>
-            </el-menu-item>
-          </el-submenu>
-          <!-- 5-->
-          <el-submenu index="5">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>导航一</span>
-            </template>
-
-            <el-menu-item index="1-1">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>导航一</span>
-              </template>
-            </el-menu-item>
-          </el-submenu>
-
-          
-        </el-menu>
+         
+       </el-menu>
 
         <!-- ---------------------------- -->
       </el-aside>
@@ -111,7 +51,8 @@
 export default {
   data() {
     return {
-      isCollapse: true
+      isCollapse: true,
+      menusData:[]
       
     };
   },
@@ -124,16 +65,25 @@ export default {
         this.$message.success('退出成功')
         // 3，跳转登录页面 
         this.$router.push('/login')
+        
           
+      },
+      //请求侧边栏菜单
+     async getmenus() {
+        const res = await this.$http.get('menus')
+        this.menusData = res.data.data
       }
     
   },
+  created(){
+    this.getmenus()
+  },
   beforeCreate() {
       
-     const token = localStorage.getItem('token')
-      if(!token) {
-          this.$router.push('/login')
-      }
+    //  const token = localStorage.getItem('token')
+    //   if(!token) {
+    //       this.$router.push('/login')
+    //   }
   }
 };
 </script>

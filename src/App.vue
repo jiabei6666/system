@@ -6,11 +6,10 @@
 
 
 <script>
-import login from 'views/login'
-export default {
-   
 
-}
+
+export default {
+ }
 </script>
 
 <style>

@@ -11,8 +11,13 @@ import MyHttpServer from 'plugins/http'
 Vue.use(MyHttpServer)
 //导入moment时间过滤器
 import moment from 'moment'
+import Mylist from 'components/custom/My-list'
+//全局定义自定义组件
+Vue.component('Mylist',Mylist)
 
 Vue.config.productionTip = false
+
+
 
 //全局过滤器-处理日期
 Vue.filter('fmtdata',(v)=>{

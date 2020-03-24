@@ -2,12 +2,7 @@
   <el-card class="box-card">
     <!-- 1， 导航栏 -->
     <div slot="header" class="clearfix">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-      </el-breadcrumb>
+      <Mylist listname1='用户管理' listname2='用户列表'/>
     </div>
     <!-- 2，输入框 -->
     <div class="user-input">
@@ -125,7 +120,11 @@
 </template>
 
 <script>
+
 export default {
+  components:{
+    
+  },
   data() {
     return {
       query: "",
@@ -155,8 +154,8 @@ export default {
   methods: {
     async getUserList() {
       //需要授权的 API ，必须在请求头中使用 Authorization 字段提供 token 令牌
-      const AUTH_TOKEN = localStorage.getItem("token");
-      this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN;
+      // const AUTH_TOKEN = localStorage.getItem("token");
+      // this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN;
       //   const  res = await  this.$http.get(`users?query=${this.query}&pagenum=${this.pagenum}&pagesize=${this.pagesize}`)
       const res = await this.$http.get("users", {
         params: {
@@ -177,7 +176,7 @@ export default {
     },
     //分页
     handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+        // console.log(`每页 ${val} 条`);
         this.pagesize = val;
         this.pagenum = 1;
         this.getUserList();
@@ -185,7 +184,7 @@ export default {
     handleCurrentChange(val) {
         this.pagenum = val
         this.getUserList();
-        console.log(`当前页: ${val}`);
+        // console.log(`当前页: ${val}`);
     },
     //查找用户
     findUser() {

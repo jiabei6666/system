@@ -55,7 +55,7 @@ export default {
              type: 'success'
             })
             //跳转home页面
-            this.$router.push({name:'home'})
+            this.$router.push('users')
 
            }else {
              //提示失败
